@@ -7,9 +7,9 @@
 (source
  (github username/reponame))
 
-(authors "Author Name <author@example.com>")
+(authors "Sofia Rodrigues <sofia@algebraic.dev>")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
+(maintainers "Sofia Rodrigues <sofia@algebraic.dev>")
 
 (license LICENSE)
 
@@ -17,10 +17,9 @@
 
 (package
  (name lang)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "A compiler")
+ (description "A compiler")
  (depends ocaml)
- (tags
-  ("add topics" "to describe" your project)))
+ (tags ("add topics" "to describe" your project)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
