@@ -1,3 +1,4 @@
 (executable
  (public_name lang)
- (name main))
+ (name main)
+ (libraries lang))
