@@ -68,22 +68,22 @@ let add (x: Nat, y: Nat) : Nat = {
 Functions can also perform side-effects such as IO actions:
 
 ```rust
-let add (x: Nat, y: Nat) : IO Nat = do {
+let add (x, y: Nat) : IO Nat = do {
     print("meoow");
     return x + y
 }
 ```
 
-You can also define functions with more flexible signatures:
+You can also define functions with `let` and `fn`.
 
 ```rust
 let add = Nat -> Nat -> Nat = fn(x, y) => x + y
 ```
 
-Or for types that depend on more specific structures:
+Or with implicit arguments.
 
 ```rust
-let addVec {x y : Nat} (v1: Vector x, v2: Vector x2) : Nat = {
+let addVec {x, y : Nat} (v1: Vector(x), v2: Vector(x2)) : Nat = {
     x + y
 }
 ```
