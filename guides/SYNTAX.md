@@ -77,7 +77,7 @@ let add (x, y: Nat) : IO Nat := do {
 You can also define functions with `let` and `fn`.
 
 ```rust
-let add := Nat -> Nat -> Nat := fn(x, y) => x + y
+let add : Nat -> Nat -> Nat := fn(x, y) => x + y
 ```
 
 Or with implicit arguments.
