@@ -1,5 +1,6 @@
 open Cmdliner
 open Lang
+
 (* Positional arguments: input files *)
 let input_files =
   let doc = "The input source files" in
