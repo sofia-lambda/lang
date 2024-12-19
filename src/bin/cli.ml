@@ -1,5 +1,6 @@
 open Cmdliner
-open Lang
+open Build
+
 
 (* Positional arguments: input files *)
 let input_files =
@@ -52,49 +53,25 @@ let features =
   let doc = "Show the features supported by the tool." in
   Arg.(value & flag & info ["features"] ~doc)
 
-let read_until_eof() =
-  let buffer = Buffer.create 2048 in
-  let rec read_loop() =
-    let line = try Some(read_line()) with End_of_file -> None in
-    match line with
-    | None -> Buffer.contents buffer
-    | Some(line) -> (
-      Buffer.add_string buffer (line ^ "\n");
-      read_loop()
-    )
-  in
-  read_loop()
-
-let parse_from_stdin() = 
-  read_until_eof()
-    |> Lexer.from_string Parser.program
-    |> Ast.show_program
-    |> print_endline;
-  `Ok()
 
 (* The main function that will run after parsing command line args *)
 let run input_files output backend root_dir from_stdin json_output module_tree_json threads dependencies features =
-  if features then (
-    (* Just print available features and exit *)
-    print_endline "Supported features: ...";
-    `Ok ()
-  ) else (
-    if from_stdin then (
-      parse_from_stdin ()
-    ) else 
-    begin
-      Printf.printf "Input files: %s\n" (String.concat ", " input_files);
-      Printf.printf "Output: %s\n" output;
-      Printf.printf "Backend: %s\n" backend;
-      Printf.printf "Root dir: %s\n" root_dir;
-      Printf.printf "From stdin: %b\n" from_stdin;
-      Printf.printf "JSON output: %b\n" json_output;
-      Printf.printf "Module tree JSON: %b\n" module_tree_json;
-      Printf.printf "Threads: %d\n" threads;
-      Printf.printf "Dependencies: %b\n" dependencies;
-      `Ok ()
-    end
-  )
+ let options = {
+    input_files;
+    output;
+    backend;
+    root_dir;
+    from_stdin;
+    json_output;
+    module_tree_json;
+    threads;
+    dependencies;
+    features;
+  } in
+  match Build.process options with
+  | `Ok () -> `Ok ()
+  | `Error msg ->
+      `Error (false, msg)
 
 (* Construct the Cmdliner term *)
 let term =
