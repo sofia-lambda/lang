@@ -1,5 +1,5 @@
 (executable
  (public_name lang)
  (name main)
- (modules main cli)
+ (modules main cli build)
  (libraries lang cmdliner))
