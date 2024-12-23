@@ -1,9 +1,10 @@
 (library
  (name lang)
+ (inline_tests)
  (flags
   (:standard -w -37))
  (preprocess
-  (pps ppx_deriving.show sedlex.ppx))
+  (pps ppx_deriving.show ppx_expect sedlex.ppx))
  (libraries ppx_deriving.runtime sedlex menhirLib))
 
 (menhir
