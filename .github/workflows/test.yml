@@ -24,4 +24,4 @@ jobs:
         opam install ppx_expect ppx_deriving sedlex menhir cmdliner 
 
     - name: Run tests
-      run: opam exec -- dune runtest @Web 
+      run: opam exec -- dune runtest  
