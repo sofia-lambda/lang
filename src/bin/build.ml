@@ -20,7 +20,7 @@ let print_features ()  =
   print_endline "- JSON output options";
   `Ok ()
 
-let read_until_eof =
+let read_until_eof () =
   let buffer = Buffer.create 2048 in
   let rec read_loop() =
     let line = try Some(read_line()) with End_of_file -> None in
@@ -34,7 +34,7 @@ let read_until_eof =
   read_loop()
 
 let parse_from_stdin json_output = 
-  read_until_eof
+  read_until_eof ()
     |> Lexer.from_string Parser.program
     |> (fun ast ->
       if json_output then

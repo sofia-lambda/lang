@@ -52,3 +52,21 @@ let provider buf () =
 let from_string f string =
   provider (Sedlexing.Utf8.from_string string) 
   |> MenhirLib.Convert.Simplified.traditional2revised f 
+
+let%expect_test "parses public struct" =
+  let program = from_string Parser.program "pub type User = {
+  name : String,
+  kind : Kind,
+  id : Id
+}
+" in
+  print_string (Ast.show_program program);
+  [%expect{|
+    [{ Ast.value =
+       (Ast.StructDecl ("User", [],
+          [("name", (Ast.TyName "String")); ("kind", (Ast.TyName "Kind"));
+            ("id", (Ast.TyName "Id"))]
+          ));
+       visibility = Ast.Public }
+      ]
+    |}]
