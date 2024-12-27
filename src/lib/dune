@@ -8,5 +8,4 @@
  (libraries ppx_deriving.runtime sedlex menhirLib))
 
 (menhir
- (modules parser)
- (flags --inspection --dump --table))
+ (modules grammar))
