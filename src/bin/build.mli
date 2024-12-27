@@ -1,17 +1,17 @@
 type compiler_options = {
-  input_files : string list;      
-  output : string;      
-  backend : string;      
-  root_dir : string;      
-  from_stdin : bool;      
-  json_output : bool;      
-  module_tree_json : bool;      
-  threads : int;      
-  dependencies : bool;      
-  features : bool;      
+  input_files : string list;
+  output : string;
+  backend : string;
+  root_dir : string;
+  from_stdin : bool;
+  json_output : bool;
+  module_tree_json : bool;
+  threads : int;
+  dependencies : bool;
+  features : bool;
 }
 
-(** 
+(**
     Processes the given compiler options and performs the appropriate actions.
 
     - If [features] is set to [true], it prints the supported features.

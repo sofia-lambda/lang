@@ -1,25 +1,25 @@
 type identifier = string [@@deriving show]
 
-type literal = 
+type literal =
   | LitInt of int
   | LitString of string
   | LitBool of bool
 [@@deriving show]
 
-type type_expr = 
+type type_expr =
   | TyName of identifier
   | TyApp of identifier * type_expr list
   | TyFun of type_expr list * type_expr
   | TyArrow of type_expr * type_expr
 [@@deriving show]
 
-type pattern = 
+type pattern =
   | PConstructor of identifier * pattern list
   | PVariable of identifier
   | PLiteral of literal
 [@@deriving show]
 
-type expr = 
+type expr =
   | Var of identifier
   | Lit of literal
   | Call of expr * expr list
@@ -28,10 +28,10 @@ type expr =
   | Let of identifier * expr
 [@@deriving show]
 
-type declaration_value = 
-  | TypeAlias of identifier * identifier list * type_expr 
-  | EnumDecl of identifier * identifier list * (identifier * type_expr list) list 
-  | StructDecl of identifier * identifier list * (identifier * type_expr) list 
+type declaration_value =
+  | TypeAlias of identifier * identifier list * type_expr
+  | EnumDecl of identifier * identifier list * (identifier * type_expr list) list
+  | StructDecl of identifier * identifier list * (identifier * type_expr) list
   | FunDecl of {
       name: identifier;
       params: (identifier * type_expr) list;
@@ -50,7 +50,7 @@ type declaration_value =
     }
 [@@deriving show]
 
-type declaration_visibility = 
+type declaration_visibility =
   | Public
   | Private
 [@@deriving show]

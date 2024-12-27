@@ -15,16 +15,16 @@
 %%
 
 
-program: 
+program:
   | decls = list(decl) EOF {decls}
 
 decl:
-  | visibility = option(PUB); value = declaration_value; { 
-      { value; visibility = (match visibility with | None -> Private | Some(_) -> Public) } 
+  | visibility = option(PUB); value = declaration_value; {
+      { value; visibility = (match visibility with | None -> Private | Some(_) -> Public) }
     }
 
 declaration_value:
-  |t = type_decl { 
+  |t = type_decl {
       let decl = t in
       decl
     }
@@ -35,8 +35,8 @@ type_params:
   | { [] }  (* empty case for no type parameters *)
 
 type_decl:
-  | TYPE type_name = TYPE_IDENT params = type_params EQUALS type_expr = type_expr { 
-      TypeAlias(type_name, params, type_expr) 
+  | TYPE type_name = TYPE_IDENT params = type_params EQUALS type_expr = type_expr {
+      TypeAlias(type_name, params, type_expr)
     }
   | TYPE type_name = TYPE_IDENT params = type_params EQUALS LBRACE field_decls = separated_list(COMMA, field_decl) RBRACE {
       StructDecl(type_name, params, field_decls)
@@ -70,7 +70,7 @@ expr:
   | IDENT { Var($1) }
   | INT { Lit(LitInt($1)) }
   | e = expr LPAREN args = separated_list(COMMA, expr) RPAREN { Call(e, args) }
-  
+
 
 block:
   | LBRACE e = expr RBRACE { e }
