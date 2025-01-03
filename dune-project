@@ -1,7 +1,6 @@
 (lang dune 3.17)
 (using menhir 3.0)
 
-
 (name lang)
 
 (generate_opam_files true)
@@ -21,7 +20,13 @@
  (name lang)
  (synopsis "A compiler")
  (description "A compiler")
- (depends ocaml)
+ (depends
+   ocaml
+   ppx_expect
+   ppx_deriving
+   sedlex
+   ppx_expect
+   menhirLib)
  (tags ("add topics" "to describe" your project)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html

@@ -1,0 +1,12 @@
+let a (a : t) : t = 3
+
+let a : t = 3
+
+type result =
+    | ok
+    | err(x, y)
+
+type user(a, b : x) = {
+    name: string,
+    age: int
+}

@@ -12,6 +12,11 @@ bug-reports: "https://github.com/username/reponame/issues"
 depends: [
   "dune" {>= "3.17"}
   "ocaml"
+  "ppx_expect"
+  "ppx_deriving"
+  "sedlex"
+  "ppx_expect"
+  "menhirLib"
   "odoc" {with-doc}
 ]
 build: [
